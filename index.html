@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Passwort-Generator</title>
+  <title>Passwort Generator</title>
   <style>
     * {
       box-sizing: border-box;
@@ -16,107 +16,236 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      background: radial-gradient(circle at top, #667eea, #1f1c2c 65%);
       color: white;
+      padding: 20px;
     }
 
-    .container {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 35px;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 450px;
+    .card {
+      width: 100%;
+      max-width: 500px;
+      padding: 40px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.14);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      font-size: 13px;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
     }
 
     h1 {
-      margin-bottom: 10px;
-      font-size: 32px;
+      margin: 0 0 12px;
+      font-size: 36px;
     }
 
-    p {
-      font-size: 16px;
-      margin-bottom: 25px;
+    .description {
+      margin: 0 0 28px;
+      line-height: 1.5;
+      color: #e8e8ff;
     }
 
     .password-box {
-      background: white;
-      color: #222;
-      padding: 15px;
-      border-radius: 10px;
-      font-size: 20px;
-      margin-bottom: 20px;
-      word-break: break-all;
-      min-height: 55px;
+      background: rgba(255, 255, 255, 0.95);
+      color: #171717;
+      padding: 18px;
+      border-radius: 18px;
+      font-size: 22px;
+      margin-bottom: 24px;
+      min-height: 62px;
       display: flex;
       justify-content: center;
       align-items: center;
+      word-break: break-all;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
     }
 
-    label {
-      display: block;
-      margin-bottom: 8px;
+    .settings {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .length-row {
+      background: rgba(255, 255, 255, 0.13);
+      padding: 16px;
+      border-radius: 18px;
+    }
+
+    .length-row label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
       font-weight: bold;
     }
 
-    input {
+    input[type="range"] {
       width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      font-size: 16px;
-      text-align: center;
+      cursor: pointer;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.13);
+      padding: 14px;
+      border-radius: 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .option input {
+      width: 20px;
+      height: 20px;
+      accent-color: #7cffb2;
+      cursor: pointer;
     }
 
     button {
       width: 100%;
-      padding: 14px;
+      padding: 15px;
       border: none;
-      border-radius: 10px;
-      background: #00c853;
-      color: white;
+      border-radius: 16px;
       font-size: 17px;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.3s;
+      transition: 0.25s;
     }
 
-    button:hover {
-      background: #00a843;
-      transform: scale(1.03);
+    .generate-button {
+      background: linear-gradient(135deg, #7cffb2, #2ee59d);
+      color: #102018;
+      margin-bottom: 12px;
+      box-shadow: 0 12px 25px rgba(46, 229, 157, 0.35);
     }
 
     .copy-button {
-      margin-top: 12px;
-      background: #ff9800;
+      background: rgba(255, 255, 255, 0.16);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.25);
     }
 
-    .copy-button:hover {
-      background: #e68900;
+    button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .hint {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #d7d7ff;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 28px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .options {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Passwort-Generator</h1>
-    <p>Generieren Sie hier ihr eigenes neues Passwort, kostenlos!</p>
+  <main class="card">
+    <div class="badge">Kostenlos und schnell</div>
+    <h1>Passwort Generator</h1>
+    <p class="description">Generieren Sie hier ihr eigenes neues Passwort, kostenlos!</p>
 
     <div id="password" class="password-box">Ihr Passwort erscheint hier</div>
 
-    <label for="length">Passwortlänge</label>
-    <input type="number" id="length" value="12" min="6" max="40">
+    <section class="settings">
+      <div class="length-row">
+        <label for="length">
+          <span>Passwortlänge</span>
+          <span id="lengthValue">12</span>
+        </label>
+        <input type="range" id="length" min="6" max="40" value="12" oninput="updateLengthValue()">
+      </div>
 
-    <button onclick="generatePassword()">Passwort generieren</button>
+      <div class="options">
+        <label class="option">
+          <span>Grossbuchstaben</span>
+          <input type="checkbox" id="uppercase" checked>
+        </label>
+
+        <label class="option">
+          <span>Kleinbuchstaben</span>
+          <input type="checkbox" id="lowercase" checked>
+        </label>
+
+        <label class="option">
+          <span>Zahlen</span>
+          <input type="checkbox" id="numbers" checked>
+        </label>
+
+        <label class="option">
+          <span>Sonderzeichen</span>
+          <input type="checkbox" id="symbols" checked>
+        </label>
+      </div>
+    </section>
+
+    <button class="generate-button" onclick="generatePassword()">Passwort generieren</button>
     <button class="copy-button" onclick="copyPassword()">Passwort kopieren</button>
-  </div>
+
+    <div class="hint" id="hint">Wählen Sie aus, welche Zeichen im Passwort vorkommen sollen.</div>
+  </main>
 
   <script>
-    function generatePassword() {
+    function updateLengthValue() {
       const length = document.getElementById("length").value;
-      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*?";
+      document.getElementById("lengthValue").textContent = length;
+    }
+
+    function generatePassword() {
+      const length = Number(document.getElementById("length").value);
+      const useUppercase = document.getElementById("uppercase").checked;
+      const useLowercase = document.getElementById("lowercase").checked;
+      const useNumbers = document.getElementById("numbers").checked;
+      const useSymbols = document.getElementById("symbols").checked;
+
+      const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const lowercase = "abcdefghijklmnopqrstuvwxyz";
+      const numbers = "0123456789";
+      const symbols = "!@#$%&*?";
+
+      let characters = "";
+
+      if (useUppercase) characters += uppercase;
+      if (useLowercase) characters += lowercase;
+      if (useNumbers) characters += numbers;
+      if (useSymbols) characters += symbols;
+
+      if (characters.length === 0) {
+        document.getElementById("hint").textContent = "Bitte wählen Sie mindestens eine Option aus.";
+        document.getElementById("password").textContent = "Keine Option ausgewählt";
+        return;
+      }
+
       let password = "";
 
       for (let i = 0; i < length; i++) {
@@ -125,18 +254,19 @@
       }
 
       document.getElementById("password").textContent = password;
+      document.getElementById("hint").textContent = "Ihr neues Passwort wurde generiert.";
     }
 
     function copyPassword() {
       const password = document.getElementById("password").textContent;
 
-      if (password === "Ihr Passwort erscheint hier") {
-        alert("Bitte zuerst ein Passwort generieren.");
+      if (password === "Ihr Passwort erscheint hier" || password === "Keine Option ausgewählt") {
+        document.getElementById("hint").textContent = "Bitte zuerst ein Passwort generieren.";
         return;
       }
 
       navigator.clipboard.writeText(password);
-      alert("Passwort wurde kopiert.");
+      document.getElementById("hint").textContent = "Passwort wurde kopiert.";
     }
   </script>
 </body>
