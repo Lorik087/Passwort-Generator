@@ -148,6 +148,36 @@
       filter: brightness(1.05);
     }
 
+    .strength-area {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .strength-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #e8e8ff;
+    }
+
+    .strength-bar {
+      width: 100%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .strength-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      background: #ff4d4d;
+      transition: 0.3s;
+    }
+
     .hint {
       margin-top: 18px;
       font-size: 13px;
@@ -209,6 +239,16 @@
       </div>
     </section>
 
+    <div class="strength-area">
+      <div class="strength-top">
+        <span>Passwortstärke</span>
+        <strong id="strengthText">Noch kein Passwort</strong>
+      </div>
+      <div class="strength-bar">
+        <div id="strengthFill" class="strength-fill"></div>
+      </div>
+    </div>
+
     <button class="generate-button" onclick="generatePassword()">Passwort generieren</button>
     <button class="copy-button" onclick="copyPassword()">Passwort kopieren</button>
 
@@ -243,6 +283,7 @@
       if (characters.length === 0) {
         document.getElementById("hint").textContent = "Bitte wählen Sie mindestens eine Option aus.";
         document.getElementById("password").textContent = "Keine Option ausgewählt";
+        updateStrength(0, 0);
         return;
       }
 
@@ -255,6 +296,45 @@
 
       document.getElementById("password").textContent = password;
       document.getElementById("hint").textContent = "Ihr neues Passwort wurde generiert.";
+      updateStrength(length, characters.length);
+    }
+
+    function updateStrength(length, characterCount) {
+      const strengthFill = document.getElementById("strengthFill");
+      const strengthText = document.getElementById("strengthText");
+
+      let score = 0;
+
+      if (length >= 8) score++;
+      if (length >= 12) score++;
+      if (length >= 16) score++;
+      if (characterCount > 26) score++;
+      if (characterCount > 62) score++;
+
+      if (length === 0 || characterCount === 0) {
+        strengthFill.style.width = "0%";
+        strengthFill.style.background = "#ff4d4d";
+        strengthText.textContent = "Noch kein Passwort";
+        return;
+      }
+
+      if (score <= 2) {
+        strengthFill.style.width = "25%";
+        strengthFill.style.background = "#ff4d4d";
+        strengthText.textContent = "Schwach";
+      } else if (score <= 4) {
+        strengthFill.style.width = "50%";
+        strengthFill.style.background = "#ffb020";
+        strengthText.textContent = "Mittel";
+      } else if (length < 24) {
+        strengthFill.style.width = "75%";
+        strengthFill.style.background = "#2ee59d";
+        strengthText.textContent = "Stark";
+      } else {
+        strengthFill.style.width = "100%";
+        strengthFill.style.background = "#00e5ff";
+        strengthText.textContent = "Unmöglich";
+      }
     }
 
     function copyPassword() {
