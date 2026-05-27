@@ -1,0 +1,137 @@
+/* Seriöses Layout für den Passwort-Generator */
+:root {
+  color-scheme: light;
+  font-family: Inter, 'Segoe UI', sans-serif;
+  color: #1a2530;
+  background: #eef3f7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background: linear-gradient(180deg, #e9eff5 0%, #f8fbfd 100%);
+}
+
+.container {
+  width: min(100%, 500px);
+  background: #ffffff;
+  border: 1px solid #d8dde4;
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(29, 42, 58, 0.12);
+  padding: 32px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: -0.04em;
+  color: #121f2e;
+}
+
+.intro {
+  margin: 12px 0 24px;
+  color: #50606f;
+  line-height: 1.65;
+  font-size: 0.98rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.85rem;
+  font-weight: 600;
+  color: #22303f;
+}
+
+input[type="number"], .output {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #c4ccd8;
+  border-radius: 14px;
+  font-size: 1rem;
+  background: #f7f9fb;
+  color: #172331;
+}
+
+input[type="number"]:focus,
+.output:focus,
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+}
+
+.checkbox-group {
+  display: grid;
+  gap: 14px;
+  margin: 20px 0 26px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: #2e3d4f;
+}
+
+.checkbox-group input {
+  width: 18px;
+  height: 18px;
+  accent-color: #1d4ed8;
+}
+
+.button-row {
+  display: grid;
+  gap: 12px;
+}
+
+button {
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+.generate {
+  background: #1d4ed8;
+  color: #ffffff;
+  box-shadow: 0 14px 30px rgba(29, 78, 216, 0.18);
+}
+
+.copy {
+  background: #eef2ff;
+  color: #1f2937;
+}
+
+.output {
+  margin-top: 14px;
+}
+
+.section-label {
+  margin-top: 22px;
+}
+
+.footer {
+  margin-top: 22px;
+  font-size: 0.92rem;
+  color: #5e6a7a;
+  text-align: center;
+}
